@@ -1,0 +1,63 @@
+""" Estimativa de pi usando o método de monte carlo """
+
+
+import math
+import random #para criarmos as bolinhas aleatórias
+import matplotlib.pyplot as plt
+
+""" número de bolinhas """
+N = 10000
+
+""" inicializar os contadores """
+dentro = 0
+fora = 0
+
+""" listas dos pontos (do gráfico) """
+x_dentro = []
+y_dentro = []
+x_fora = []
+y_fora = []
+
+""" criar um circulo de raio r """
+r = 1
+
+""" gera vários pontos aleatórios dentro do quadrado [-r, r] x [-r, r]
+verifica se o ponto está dentro do círculo com a equação x² + y² <= r²
+soma mais um sempre que identifica uma bolinha dentro e uma bolinha fora """
+for i in range(N):
+    x = random.uniform(r, -r)
+    y = random.uniform(-r, r)
+    
+    if x**2 + y**2 <= r**2:
+        dentro += 1 
+        x_dentro.append(x)
+        y_dentro.append(y)
+    else:
+        fora += 1 
+        x_fora.append(x)
+        y_fora.append(y)
+
+""" π estimado
+# area do quadrado = total de bolinhas
+# area do circulo = bolinhas dentro
+# circulo/quadrado = dentro/total = pi.r^2/2.pi.r^2 = pi/4
+# pi = 4 . dentro/total """
+
+pi_buffon = 4 * (dentro / N)
+
+print(f"Total de pontos: {N}")
+print(f"Pontos dentro do círculo: {dentro}")
+print(f"Estimativa de π ≈ {pi_buffon:.6f}")
+
+""" Gráfico
+- cria uma figura de tamanho 6x6
+- cria bolinhas roxas dentro da circunferencia
+- cria bolinhas verdes fora da circunferencia
+- cria o título do gráfico
+- mostra o gráfico """
+
+plt.figure(figsize=(6,6)) 
+plt.scatter(x_dentro, y_dentro, color='purple', s=3) 
+plt.scatter(x_fora, y_fora, color='green', s=3) 
+plt.title(f'Estimativa de π ≈ {pi_buffon:.6f}') 
+plt.show()
