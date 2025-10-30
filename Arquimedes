@@ -6,7 +6,7 @@ import pandas as pd
 def poligono(s,r):
 
   """
-  define o lado do próximo polígono inscrito que tem o dobro de lados do]
+  define o lado do próximo polígono inscrito que tem o dobro de lados do
   anterior, retorna esse lado como s atualizado
   """
   a = math.sqrt(1-(s/2)**2)
@@ -24,17 +24,15 @@ def arpimedes(N,r):
     - se N = 6 * 2^k, ele vai iterar até um valor dado.
     - se não, calcula pelo comprimento do lado:
         6s = 2 * pi * R, onde R e s = 1
-    """
-    if N < 3:
-      print("O número de lados deve ser >= 3")
 
-    """verifica que N é multiplo de 6*2k
+    verifica que N é multiplo de 6*2k
     faz uma cópia de N, para não alterar o valor original
     inicia k em zero
-    verifica que n é par vendo que o resto da divisão por 2 é zero
-    e que n é maior que 6
-    enquanto isso for verdade, divide n por 2 e conta com k quantas vezes
+    verifica que N é par vendo que o resto da divisão por 2 é zero
+    e que N é maior que 6
+    enquanto isso for verdade, divide N por 2 e conta com k quantas vezes
     dobramos o numero de lados
+    inicia r como o raio do círculo
     """
     n = N
     k = 0
@@ -42,20 +40,14 @@ def arpimedes(N,r):
         n //= 2
         k += 1
 
-    s = r # Initialize s before the loop
-
-    for i in range(k):
-          """inicia a iteração k times até chegar no polígono de N lados"""
-          s = poligono(s, r)
-          """formula para calcular pi com o método de arquimedes : pi=(N.s/2R)"""
-    pi_est = (N * s) / (2 * r)
-    return pi_est
+    s = r 
 
 
 def resultados_arpimedes(iteracoes=4, r=1):
     """
     gera uma lista de valores estimados de pi começando do hexágono de raio r,
     e dobrando o número de lados em cada iteração.
+    formula para calcular pi com o método de arquimedes : pi=(N.s/2R)
     """
     resultados = []
     N = 6
